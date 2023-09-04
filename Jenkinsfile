@@ -14,20 +14,15 @@ pipeline{
             }
             post {
                 success {
-                    emailext (
-                        to: 'your_email@example.com',
-                        subject: 'Test Stage Successful',
-                        body: 'Test stage completed successfully.',
-                        attachLog: true
-                    )
+                    emailext body: 'Test stage completed successfully.',
+                             to: 'your_email@example.com',
+                             subject: 'Test Stage Successful'
+                    
                 }
                 failure {
-                    emailext (
-                        to: 'your_email@example.com',
-                        subject: 'Test Stage Failed',
-                        body: 'Test stage failed.',
-                        attachLog: true
-                    )
+                    emailext body: 'Test stage failed.',
+                             to: 'your_email@example.com',
+                             subject: 'Test Stage Failed'
                 }
             }
         }
