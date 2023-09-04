@@ -5,13 +5,30 @@ pipeline{
             steps{
                 echo "Build the code using a build automation tool to compile and package the code"
                 echo "Tool : Maven"
-                echo "Testing1234"
             }
         }
         stage('Unit and Integration Tests'){
             steps{
                 echo "run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected"
                 echo "Tools : JUnit for unit tests and Selenium for integration tests"
+            }
+            post {
+                success {
+                    emailext (
+                        to: 'your_email@example.com',
+                        subject: 'Test Stage Successful',
+                        body: 'Test stage completed successfully.',
+                        attachLog: true
+                    )
+                }
+                failure {
+                    emailext (
+                        to: 'your_email@example.com',
+                        subject: 'Test Stage Failed',
+                        body: 'Test stage failed.',
+                        attachLog: true
+                    )
+                }
             }
         }
         stage('Code Analysis'){
@@ -24,6 +41,24 @@ pipeline{
             steps{
                 echo "Perform a security scan on the code using a tool to identify any vulnerabilities"
                 echo "Tools : OWASP ZAP (Zed Attack Proxy) "
+            }
+            post {
+                success {
+                    emailext (
+                        to: 'your_email@example.com',
+                        subject: 'Security Scan Successful',
+                        body: 'Security scan completed successfully.',
+                        attachLog: true
+                    )
+                }
+                failure {
+                    emailext (
+                        to: 'your_email@example.com',
+                        subject: 'Security Scan Failed',
+                        body: 'Security scan failed.',
+                        attachLog: true
+                    )
+                }
             }
         }
         stage('Integration Tests on Staging'){
