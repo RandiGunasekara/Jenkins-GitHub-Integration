@@ -5,7 +5,7 @@ pipeline{
             steps{
                 echo "Build the code using a build automation tool to compile and package the code"
                 echo "Tool : Maven"
-                echo "Testing123"
+                echo "Test"
             }
         }
         stage('Unit and Integration Tests'){
