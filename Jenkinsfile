@@ -5,7 +5,6 @@ pipeline{
             steps{
                 echo "Build the code using a build automation tool to compile and package the code"
                 echo "Tool : Maven"
-                echo "Test 1323"
             }
         }
         stage('Unit and Integration Tests'){
@@ -18,12 +17,14 @@ pipeline{
                     emailext body: 'Test stage completed successfully.',
                              to: 'randitamasha21@gmail.com',
                              subject: 'Test Stage Successful'
+                             attachLog: true
                     
                 }
                 failure {
                     emailext body: 'Test stage failed.',
                              to: 'randitamasha21@gmail.com',
                              subject: 'Test Stage Failed'
+                             attachLog: true
                 }
             }
         }
@@ -41,7 +42,7 @@ pipeline{
             post {
                 success {
                     emailext (
-                        to: 'your_email@example.com',
+                        to: 'randitamasha21@gmail.com',
                         subject: 'Security Scan Successful',
                         body: 'Security scan completed successfully.',
                         attachLog: true
@@ -49,7 +50,7 @@ pipeline{
                 }
                 failure {
                     emailext (
-                        to: 'your_email@example.com',
+                        to: 'randitamasha21@gmail.com',
                         subject: 'Security Scan Failed',
                         body: 'Security scan failed.',
                         attachLog: true
